@@ -4,12 +4,22 @@ using ScreenSound.Banco;
 
 try
 {
-    var connection = new Connection();
-    var listarArtistas = connection.Listar();
+    var artistaDal = new ArtistaDAL();
+
+    artistaDal.Adicionar(new Artista("Drake",
+        "Aubrey Drake Graham é um rapper, cantor, compositor, produtor musical, ator e empresário canadense. Drake inicialmente ganhou reconhecimento como ator na série de televisão de drama adolescente Degrassi: The Next Generation, no início dos anos 2000"));
+
+    artistaDal.Atualizar(new Artista("Aubrey Drake Graham",
+            "Aubrey Drake Graham é um rapper, cantor, compositor, produtor musical, ator e empresário canadense. Drake inicialmente ganhou reconhecimento como ator na série de televisão de drama adolescente Degrassi: The Next Generation, no início dos anos 2000"),
+        1);
+
+    var listarArtistas = artistaDal.Listar();
     foreach (var artista in listarArtistas)
     {
         Console.WriteLine(artista);
     }
+
+    artistaDal.Deletar(7);
 }
 catch (Exception ex)
 {
