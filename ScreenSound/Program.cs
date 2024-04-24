@@ -1,37 +1,8 @@
 ﻿using ScreenSound.Menus;
-using ScreenSound.Modelos;
 using ScreenSound.Banco;
 
-try
-{
-    var artistaDal = new ArtistaDAL();
-
-    artistaDal.Adicionar(new Artista("Drake",
-        "Aubrey Drake Graham é um rapper, cantor, compositor, produtor musical, ator e empresário canadense. Drake inicialmente ganhou reconhecimento como ator na série de televisão de drama adolescente Degrassi: The Next Generation, no início dos anos 2000"));
-
-    artistaDal.Atualizar(new Artista("Aubrey Drake Graham",
-            "Aubrey Drake Graham é um rapper, cantor, compositor, produtor musical, ator e empresário canadense. Drake inicialmente ganhou reconhecimento como ator na série de televisão de drama adolescente Degrassi: The Next Generation, no início dos anos 2000"),
-        1);
-
-    var listarArtistas = artistaDal.Listar();
-    foreach (var artista in listarArtistas)
-    {
-        Console.WriteLine(artista);
-    }
-
-    artistaDal.Deletar(7);
-}
-catch (Exception ex)
-{
-    Console.WriteLine(ex.Message);
-}
-
-Artista ira = new Artista("Ira!", "Banda Ira!");
-Artista beatles = new("The Beatles", "Banda The Beatles");
-
-Dictionary<string, Artista> artistasRegistrados = new();
-artistasRegistrados.Add(ira.Nome, ira);
-artistasRegistrados.Add(beatles.Nome, beatles);
+var context = new ScreenSoundContext();
+var artistaDal = new ArtistaDAL(context);
 
 Dictionary<int, Menu> opcoes = new();
 opcoes.Add(1, new MenuRegistrarArtista());
@@ -70,7 +41,7 @@ void ExibirOpcoesDoMenu()
     if (opcoes.ContainsKey(opcaoEscolhidaNumerica))
     {
         Menu menuASerExibido = opcoes[opcaoEscolhidaNumerica];
-        menuASerExibido.Executar(artistasRegistrados);
+        menuASerExibido.Executar(artistaDal);
         if (opcaoEscolhidaNumerica > 0) ExibirOpcoesDoMenu();
     }
     else
