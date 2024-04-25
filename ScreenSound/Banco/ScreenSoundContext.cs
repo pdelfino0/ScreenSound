@@ -1,4 +1,3 @@
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ScreenSound.Modelos;
 
@@ -10,7 +9,7 @@ internal class ScreenSoundContext : DbContext
     public DbSet<Musica> Musicas { get; set; }
 
     private const string ConnectionString =
-        "Server=localhost\\SQLEXPRESS;Database=Alura;Integrated Security=True;TrustServerCertificate=true;";
+        "Server=localhost\\SQLEXPRESS;Database=Alura;Integrated Security=True;TrustServerCertificate=true;Initial Catalog=ScreenSoundV0;";
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
