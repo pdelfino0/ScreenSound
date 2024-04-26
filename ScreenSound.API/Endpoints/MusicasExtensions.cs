@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ScreenSound.API.Requests;
 using ScreenSound.Banco;
 using ScreenSound.Modelos;
 
@@ -12,8 +13,9 @@ public static class MusicasExtensions
 
         app.MapGet("/musicas", ([FromServices] Dal<Musica> dal) => { return Results.Ok(dal.Listar()); });
 
-        app.MapPost("/Musicas", ([FromServices] Dal<Musica> dal, [FromBody] Musica musica) =>
+        app.MapPost("/Musicas", ([FromServices] Dal<Musica> dal, [FromBody] MusicaRequest musicaRequest) =>
         {
+            var musica = new Musica(musicaRequest.Nome, musicaRequest.AnoLancamento);
             dal.Adicionar(musica);
             return Results.Ok();
         });

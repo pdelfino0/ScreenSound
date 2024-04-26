@@ -2,10 +2,12 @@
 
 public class Musica
 {
-    public Musica(string nome)
+    public Musica(string nome, string anoLancamento)
     {
         Nome = nome;
+        AnoLancamento = Convert.ToInt32(anoLancamento);
     }
+
     public Musica()
     {
     }
