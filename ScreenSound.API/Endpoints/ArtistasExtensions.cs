@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using ScreenSound.API.Requests;
 using ScreenSound.Banco;
@@ -9,7 +10,18 @@ public static class ArtistasExtensions
 {
     public static void AddEndpointsArtistas(this WebApplication app)
     {
-        app.MapGet("/artistas", ([FromServices] Dal<Artista> dal) => { return Results.Ok(dal.Listar()); });
+        app.MapGet("/artistas", ([FromServices] Dal<Artista> dal) =>
+        {
+            var listaDeArtistas = dal.Listar();
+            if (listaDeArtistas is null)
+            {
+                return Results.NotFound();
+            }
+
+            var listaDeArtistasResponse = EntityListToResponseList(listaDeArtistas);
+
+            return Results.Ok(listaDeArtistasResponse);
+        });
 
         app.MapGet("/artistas/{nome}", ([FromServices] Dal<Artista> dal, string nome) =>
         {
@@ -55,5 +67,15 @@ public static class ArtistasExtensions
             dal.Atualizar(artistaAAtualizar);
             return Results.Ok();
         });
+    }
+
+    private static ICollection<ArtistaResponse> EntityListToResponseList(IEnumerable<Artista> listaDeArtistas)
+    {
+        return listaDeArtistas.Select(a => EntityToResponse(a)).ToList();
+    }
+
+    private static ArtistaResponse EntityToResponse(Artista artista)
+    {
+        return new ArtistaResponse(artista.Nome, artista.FotoPerfil, artista.Bio);
     }
 }
