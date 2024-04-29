@@ -1,20 +1,22 @@
-﻿namespace ScreenSound.Modelos;
+﻿using ScreenSound.Modelos;
+
+namespace ScreenSound.Shared.Modelos.Modelos;
 
 public class Musica
 {
-    public Musica(string nome, string anoLancamento)
-    {
-        Nome = nome;
-        AnoLancamento = Convert.ToInt32(anoLancamento);
-    }
-
     public Musica()
     {
+    }
+
+    public Musica(string nome)
+    {
+        Nome = nome;
     }
 
     public string Nome { get; set; }
     public int Id { get; set; }
     public int? AnoLancamento { get; set; }
+    public int? ArtistaId { get; set; }
     public virtual Artista? Artista { get; set; }
 
     public void ExibirFichaTecnica()
