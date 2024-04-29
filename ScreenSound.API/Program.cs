@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ScreenSoundContext>();
 builder.Services.AddTransient<Dal<Artista>>();
 builder.Services.AddTransient<Dal<Musica>>();
+builder.Services.AddTransient<Dal<Genero>>();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -20,6 +21,7 @@ var app = builder.Build();
 
 app.AddEndpointsArtistas();
 app.AddEndpointsMusicas();
+app.AddEndpointGeneros();
 app.UseSwagger();
 app.UseSwaggerUI();
 
