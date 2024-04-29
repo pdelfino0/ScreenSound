@@ -1,3 +1,5 @@
+using ScreenSound.Shared.Dados.Banco;
+
 namespace ScreenSound.Banco;
 
 public class Dal<T> where T : class

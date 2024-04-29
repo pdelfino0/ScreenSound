@@ -5,14 +5,15 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ScreenSound.Banco;
+using ScreenSound.Shared.Dados.Banco;
 
 #nullable disable
 
 namespace ScreenSound.Migrations
 {
     [DbContext(typeof(ScreenSoundContext))]
-    [Migration("20240425024206_ProjetoInicial")]
-    partial class ProjetoInicial
+    [Migration("20240425030009_PopularTabela")]
+    partial class PopularTabela
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
